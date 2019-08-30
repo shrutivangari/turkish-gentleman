@@ -4,6 +4,7 @@ import com.shruti.turkishgentleman.partition.PurchaseKeyPartitioner;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,6 +12,9 @@ import java.util.Properties;
 
 @Configuration
 public class ApplicationConfiguration {
+
+    @Value("${batch.size:5}")
+    private int batchSize;
 
     private static Properties getProducerProperties() {
         Properties producerProperties = new Properties();
@@ -25,13 +29,18 @@ public class ApplicationConfiguration {
         return producerProperties;
     }
 
-    protected Properties getConsumerProperties() {
+    private Properties getConsumerProperties() {
         Properties properties = new Properties();
         properties.put("bootstrap.servers", "localhost:9092");
         properties.put("key.deserializer", StringSerializer.class.getName());
         properties.put("value.deserializer", StringSerializer.class.getName());
-        properties.put("batch.size", 5);
+        properties.put("batch.size", batchSize);
         return properties;
+    }
+
+    @Bean(name = "numberOfPartitions")
+    public Integer numberOfPartitions() {
+        return 10;
     }
 //
 //    @Bean
