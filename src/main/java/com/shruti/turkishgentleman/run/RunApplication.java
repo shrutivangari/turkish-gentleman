@@ -1,5 +1,6 @@
 package com.shruti.turkishgentleman.run;
 
+import com.shruti.turkishgentleman.consumer.ThreadedConsumer;
 import com.shruti.turkishgentleman.mapreducelambdas.MapReduceConcepts;
 import com.shruti.turkishgentleman.producer.SettingPartition;
 import com.shruti.turkishgentleman.producer.SimpleProducer;
@@ -18,11 +19,15 @@ public class RunApplication {
     @Autowired
     private SettingPartition settingPartition;
 
+    @Autowired
+    private ThreadedConsumer threadedConsumer;
+
     public void execute() {
         System.out.println("Executing");
         mapReduceConcepts.mapDemo();
         mapReduceConcepts.reduceDemo();
         simpleProducer.produceMessages();
         settingPartition.setPartition();
+        threadedConsumer.startConsuming();
     }
 }

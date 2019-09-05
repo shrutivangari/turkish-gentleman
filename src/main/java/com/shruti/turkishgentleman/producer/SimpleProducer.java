@@ -21,12 +21,9 @@ public class SimpleProducer {
     private PurchaseKey purchaseKey;
 
     public void produceMessages() {
-//        PurchaseKey purchaseKey = new PurchaseKey();
-
         purchaseKey.setCustomerId("12345678");
         purchaseKey.setTransactionDate(new Date());
 
-//        PurchaseKey key = new PurchaseKey("12345678", new Date());
         try(Producer<String, String> producer = new KafkaProducer<>(producerProperties)) {
             ProducerRecord<String, String> record = new ProducerRecord<>("transactions", String.valueOf(purchaseKey), "\"item\":\"book\",\"price\":10.99}");
 

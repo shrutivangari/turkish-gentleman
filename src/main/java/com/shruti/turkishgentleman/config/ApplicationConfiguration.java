@@ -2,15 +2,15 @@ package com.shruti.turkishgentleman.config;
 
 import com.shruti.turkishgentleman.partition.PurchaseKey;
 import com.shruti.turkishgentleman.partition.PurchaseKeyPartitioner;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.producer.KafkaProducer;
+import com.shruti.turkishgentleman.utils.Slug;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Properties;
+import java.util.UUID;
 
 @Configuration
 public class ApplicationConfiguration {
@@ -45,10 +45,12 @@ public class ApplicationConfiguration {
 
     private Properties getConsumerProperties() {
         Properties properties = new Properties();
+        String id = Slug.generate();
         properties.put("bootstrap.servers", "localhost:9092");
-        properties.put("key.deserializer", StringSerializer.class.getName());
-        properties.put("value.deserializer", StringSerializer.class.getName());
+        properties.put("key.deserializer", StringDeserializer.class.getName());
+        properties.put("value.deserializer", StringDeserializer.class.getName());
         properties.put("batch.size", batchSize);
+        properties.put("group.id", id);
         return properties;
     }
 
@@ -56,16 +58,6 @@ public class ApplicationConfiguration {
     public Integer numberOfPartitions() {
         return 10;
     }
-//
-//    @Bean
-//    public KafkaProducer<String, String> getKafkaProducer() {
-//        return new KafkaProducer<String, String>(getProducerProperties());
-//    }
-//
-//    @Bean
-//    public KafkaConsumer<String, String> getKafkaConsumer() {
-//        return new KafkaConsumer<String, String>(getConsumerProperties());
-//    }
 
     @Bean("purchaseKeyProducerProperties")
     public Properties purchaseKeyProducerProperties() {
@@ -77,7 +69,7 @@ public class ApplicationConfiguration {
         return getStringProducerProperties();
     }
 
-    @Bean
+    @Bean("consumerProperties")
     public Properties consumerProperties() {
         return getConsumerProperties();
     }
