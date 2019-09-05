@@ -39,7 +39,6 @@ public class ApplicationConfiguration {
         producerProperties.put("acks", "1");
         producerProperties.put("retries", "3");
         producerProperties.put("compression.type", "snappy");
-        producerProperties.put("partitioner.class", PurchaseKeyPartitioner.class.getName());
 
         return producerProperties;
     }
