@@ -17,12 +17,12 @@ public class SettingPartition {
     //Lock free thread safe operations on single variables
     AtomicInteger partitionIndex = new AtomicInteger(0);
 
-    private void setPartition() {
+    public void setPartition() {
 
         //Dont have to keep track of the value of the integer if it goes beyond Integer.MAX_VALUE
         int currentPartition = Math.abs(partitionIndex.getAndIncrement() % numberOfPartitions);
 
         ProducerRecord<String, String> record = new ProducerRecord<>("topic", currentPartition, "key", "Value");
-
+        System.out.println(record.value());
     }
 }

@@ -1,6 +1,7 @@
 package com.shruti.turkishgentleman.run;
 
 import com.shruti.turkishgentleman.mapreducelambdas.MapReduceConcepts;
+import com.shruti.turkishgentleman.producer.SettingPartition;
 import com.shruti.turkishgentleman.producer.SimpleProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,10 +15,14 @@ public class RunApplication {
     @Autowired
     private SimpleProducer simpleProducer;
 
+    @Autowired
+    private SettingPartition settingPartition;
+
     public void execute() {
         System.out.println("Executing");
         mapReduceConcepts.mapDemo();
         mapReduceConcepts.reduceDemo();
         simpleProducer.produceMessages();
+        settingPartition.setPartition();
     }
 }
