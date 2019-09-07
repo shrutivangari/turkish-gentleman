@@ -4,6 +4,7 @@ import com.shruti.turkishgentleman.consumer.ThreadedConsumer;
 import com.shruti.turkishgentleman.mapreducelambdas.MapReduceConcepts;
 import com.shruti.turkishgentleman.producer.SettingPartition;
 import com.shruti.turkishgentleman.producer.SimpleProducer;
+import com.shruti.turkishgentleman.streams.StreamConsumerFlow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,12 +23,17 @@ public class RunApplication {
     @Autowired
     private ThreadedConsumer threadedConsumer;
 
+    @Autowired
+    private StreamConsumerFlow streamConsumerFlow;
+
     public void execute() {
         System.out.println("Executing");
         mapReduceConcepts.mapDemo();
         mapReduceConcepts.reduceDemo();
         simpleProducer.produceMessages();
         settingPartition.setPartition();
-        threadedConsumer.startConsuming();
+        //threadedConsumer.startConsuming();
+        streamConsumerFlow.helloWorld();
+        streamConsumerFlow.puttingItTogether();
     }
 }
