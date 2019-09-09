@@ -28,12 +28,22 @@ public class RunApplication {
 
     public void execute() {
         System.out.println("Executing");
+        kafkaStreamsBasics();
+    }
+
+    private void mapReduceDemo() {
         mapReduceConcepts.mapDemo();
         mapReduceConcepts.reduceDemo();
+    }
+
+    private void producePartitionConsumeMessages() {
         simpleProducer.produceMessages();
         settingPartition.setPartition();
         //threadedConsumer.startConsuming();
-        streamConsumerFlow.helloWorld();
-        streamConsumerFlow.puttingItTogether();
+    }
+
+    private void kafkaStreamsBasics() {
+        streamConsumerFlow.helloWorldStreamsDemo();
+        streamConsumerFlow.helloNotDeprecated();
     }
 }

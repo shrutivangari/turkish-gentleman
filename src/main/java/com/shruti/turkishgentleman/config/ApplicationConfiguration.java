@@ -5,6 +5,7 @@ import com.shruti.turkishgentleman.partition.PurchaseKeyPartitioner;
 import com.shruti.turkishgentleman.utils.Slug;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.apache.kafka.streams.StreamsConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -72,5 +73,23 @@ public class ApplicationConfiguration {
     @Bean("consumerProperties")
     public Properties consumerProperties() {
         return getConsumerProperties();
+    }
+
+    private Properties getStreamProperties() {
+        Properties streamProperties = new Properties();
+        streamProperties.put(StreamsConfig.APPLICATION_ID_CONFIG, "shruti_test");
+        streamProperties.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        return streamProperties;
+    }
+
+    @Bean("streamProperties")
+    public Properties getStreamProps() {
+        return getStreamProperties();
+    }
+
+    @Bean("streamsConfig")
+    public StreamsConfig streamsConfiguration() {
+        StreamsConfig streamsConfig = new StreamsConfig(getStreamProperties());
+        return streamsConfig;
     }
 }
