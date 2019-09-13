@@ -6,6 +6,7 @@ import com.shruti.turkishgentleman.producer.SettingPartition;
 import com.shruti.turkishgentleman.producer.SimpleProducer;
 import com.shruti.turkishgentleman.streams.StreamConsumerFlow;
 import com.shruti.turkishgentleman.streams.StreamingApp;
+import com.shruti.turkishgentleman.streams.StreamingAppAdvanced;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +31,9 @@ public class RunApplication {
     @Autowired
     private StreamingApp streamingApp;
 
+    @Autowired
+    private StreamingAppAdvanced streamingAppAdvanced;
+
     public void execute() {
         System.out.println("Executing");
         kafkaStreamsEndToEnd();
@@ -53,5 +57,6 @@ public class RunApplication {
 
     private void kafkaStreamsEndToEnd() {
         streamingApp.processStreams();
+        streamingAppAdvanced.consume();
     }
 }
