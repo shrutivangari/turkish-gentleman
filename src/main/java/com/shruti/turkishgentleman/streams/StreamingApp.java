@@ -1,5 +1,6 @@
 package com.shruti.turkishgentleman.streams;
 
+import com.shruti.turkishgentleman.clients.producer.MockDataProducer;
 import com.shruti.turkishgentleman.streams.model.Purchase;
 import com.shruti.turkishgentleman.streams.model.PurchasePattern;
 import com.shruti.turkishgentleman.streams.model.RewardAccumulator;
@@ -28,7 +29,7 @@ public class StreamingApp {
     @Qualifier("streamProperties")
     private Properties streamProperties;
 
-    public void processStreams() throws InterruptedException {
+    public void processStreams() {
 
         //Streams Config
         StreamsConfig streamsConfig = new StreamsConfig(streamProperties);
@@ -57,10 +58,16 @@ public class StreamingApp {
         purchaseKStream.print(Printed.<String, Purchase>toSysOut().withLabel("purchases"));
         purchaseKStream.to("purchases", Produced.with(stringSerde,purchaseSerde));
 
+        MockDataProducer.produceRandomTextData();
         KafkaStreams kafkaStreams = new KafkaStreams(streamsBuilder.build(),streamProperties);
         kafkaStreams.start();
-        Thread.sleep(65000);
+        try {
+            Thread.sleep(65000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         kafkaStreams.close();
+        MockDataProducer.shutdown();
 
     }
 

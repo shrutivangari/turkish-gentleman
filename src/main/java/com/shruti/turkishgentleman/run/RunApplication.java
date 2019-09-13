@@ -5,6 +5,7 @@ import com.shruti.turkishgentleman.mapreducelambdas.MapReduceConcepts;
 import com.shruti.turkishgentleman.producer.SettingPartition;
 import com.shruti.turkishgentleman.producer.SimpleProducer;
 import com.shruti.turkishgentleman.streams.StreamConsumerFlow;
+import com.shruti.turkishgentleman.streams.StreamingApp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,9 +27,12 @@ public class RunApplication {
     @Autowired
     private StreamConsumerFlow streamConsumerFlow;
 
+    @Autowired
+    private StreamingApp streamingApp;
+
     public void execute() {
         System.out.println("Executing");
-        kafkaStreamsBasics();
+        kafkaStreamsEndToEnd();
     }
 
     private void mapReduceDemo() {
@@ -45,5 +49,9 @@ public class RunApplication {
     private void kafkaStreamsBasics() {
         streamConsumerFlow.helloWorldStreamsDemo();
         streamConsumerFlow.helloNotDeprecated();
+    }
+
+    private void kafkaStreamsEndToEnd() {
+        streamingApp.processStreams();
     }
 }
