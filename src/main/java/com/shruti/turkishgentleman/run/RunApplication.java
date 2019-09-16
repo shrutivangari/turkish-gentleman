@@ -1,9 +1,9 @@
 package com.shruti.turkishgentleman.run;
 
-import com.shruti.turkishgentleman.consumer.ThreadedConsumer;
+import com.shruti.turkishgentleman.clients.consumer.ThreadedConsumer;
 import com.shruti.turkishgentleman.mapreducelambdas.MapReduceConcepts;
-import com.shruti.turkishgentleman.producer.SettingPartition;
-import com.shruti.turkishgentleman.producer.SimpleProducer;
+import com.shruti.turkishgentleman.clients.producer.SettingPartition;
+import com.shruti.turkishgentleman.clients.producer.SimpleProducer;
 import com.shruti.turkishgentleman.streams.StreamConsumerFlow;
 import com.shruti.turkishgentleman.streams.StreamingApp;
 import com.shruti.turkishgentleman.streams.StreamingAppAdvanced;

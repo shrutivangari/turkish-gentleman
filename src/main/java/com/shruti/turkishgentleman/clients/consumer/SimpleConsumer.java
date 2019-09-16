@@ -1,4 +1,4 @@
-package com.shruti.turkishgentleman.consumer;
+package com.shruti.turkishgentleman.clients.consumer;
 
 import org.apache.kafka.clients.consumer.Consumer;
 import org.springframework.beans.factory.annotation.Autowired;

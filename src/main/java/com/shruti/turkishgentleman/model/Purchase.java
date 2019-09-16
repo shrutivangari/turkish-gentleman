@@ -1,8 +1,13 @@
-package com.shruti.turkishgentleman.streams.model;
+package com.shruti.turkishgentleman.model;
 
 import java.util.Date;
 import java.util.Objects;
 
+/***
+ * POJO class: Purchase
+ * Uses Builder Pattern
+ * Use Builder when you have too many constructor arguments -> when args with the same type exists, compiler accepts the values but the issue might show somewhere down the line
+ */
 public class Purchase {
 
     private String firstName;

@@ -1,9 +1,9 @@
 package com.shruti.turkishgentleman.streams;
 
 import com.shruti.turkishgentleman.clients.producer.MockDataProducer;
-import com.shruti.turkishgentleman.streams.model.Purchase;
-import com.shruti.turkishgentleman.streams.model.PurchasePattern;
-import com.shruti.turkishgentleman.streams.model.RewardAccumulator;
+import com.shruti.turkishgentleman.model.Purchase;
+import com.shruti.turkishgentleman.model.PurchasePattern;
+import com.shruti.turkishgentleman.model.RewardAccumulator;
 import com.shruti.turkishgentleman.utils.db.SecurityDBService;
 import com.shruti.turkishgentleman.utils.serde.StreamsSerdes;
 import org.apache.kafka.common.serialization.Serde;

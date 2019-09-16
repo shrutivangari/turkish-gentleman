@@ -1,4 +1,4 @@
-package com.shruti.turkishgentleman.producer;
+package com.shruti.turkishgentleman.clients.producer;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;

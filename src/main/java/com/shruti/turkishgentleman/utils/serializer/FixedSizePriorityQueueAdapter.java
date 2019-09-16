@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.shruti.turkishgentleman.streams.model.Purchase;
+import com.shruti.turkishgentleman.model.Purchase;
 import com.shruti.turkishgentleman.utils.collectors.FixedSizePriorityQueue;
 
 import java.io.IOException;

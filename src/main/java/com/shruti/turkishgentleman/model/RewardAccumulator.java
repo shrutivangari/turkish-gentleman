@@ -1,4 +1,4 @@
-package com.shruti.turkishgentleman.streams.model;
+package com.shruti.turkishgentleman.model;
 
 public class RewardAccumulator {
 

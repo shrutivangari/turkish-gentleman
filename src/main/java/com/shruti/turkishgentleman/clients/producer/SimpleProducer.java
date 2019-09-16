@@ -1,4 +1,4 @@
-package com.shruti.turkishgentleman.producer;
+package com.shruti.turkishgentleman.clients.producer;
 
 import com.shruti.turkishgentleman.partition.PurchaseKey;
 import org.apache.kafka.clients.producer.*;

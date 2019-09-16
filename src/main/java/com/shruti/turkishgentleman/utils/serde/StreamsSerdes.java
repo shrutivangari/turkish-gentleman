@@ -1,8 +1,8 @@
 package com.shruti.turkishgentleman.utils.serde;
 
-import com.shruti.turkishgentleman.streams.model.Purchase;
-import com.shruti.turkishgentleman.streams.model.PurchasePattern;
-import com.shruti.turkishgentleman.streams.model.RewardAccumulator;
+import com.shruti.turkishgentleman.model.Purchase;
+import com.shruti.turkishgentleman.model.PurchasePattern;
+import com.shruti.turkishgentleman.model.RewardAccumulator;
 import com.shruti.turkishgentleman.utils.serializer.JsonDeserializer;
 import com.shruti.turkishgentleman.utils.serializer.JsonSerializer;
 import org.apache.kafka.common.serialization.Deserializer;
