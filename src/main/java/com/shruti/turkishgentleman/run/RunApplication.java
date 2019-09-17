@@ -4,6 +4,7 @@ import com.shruti.turkishgentleman.clients.consumer.ThreadedConsumer;
 import com.shruti.turkishgentleman.mapreducelambdas.MapReduceConcepts;
 import com.shruti.turkishgentleman.clients.producer.SettingPartition;
 import com.shruti.turkishgentleman.clients.producer.SimpleProducer;
+import com.shruti.turkishgentleman.streams.KStreamsJoinsApp;
 import com.shruti.turkishgentleman.streams.StreamConsumerFlow;
 import com.shruti.turkishgentleman.streams.StreamingApp;
 import com.shruti.turkishgentleman.streams.StreamingAppAdvanced;
@@ -34,9 +35,12 @@ public class RunApplication {
     @Autowired
     private StreamingAppAdvanced streamingAppAdvanced;
 
+    @Autowired
+    private KStreamsJoinsApp kStreamsJoinsApp;
+
     public void execute() {
         System.out.println("Executing");
-        kafkaStreamsEndToEnd();
+        kafkaStreamsFeatures();
     }
 
     private void mapReduceDemo() {
@@ -58,5 +62,9 @@ public class RunApplication {
     private void kafkaStreamsEndToEnd() {
         streamingApp.processStreams();
         streamingAppAdvanced.consume();
+    }
+
+    private void kafkaStreamsFeatures() {
+        kStreamsJoinsApp.join();
     }
 }
