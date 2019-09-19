@@ -8,6 +8,7 @@ import com.shruti.turkishgentleman.streams.KStreamsJoinsApp;
 import com.shruti.turkishgentleman.streams.StreamConsumerFlow;
 import com.shruti.turkishgentleman.streams.StreamingApp;
 import com.shruti.turkishgentleman.streams.StreamingAppAdvanced;
+import com.shruti.turkishgentleman.streams.state.KafkaStreamsState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,6 +39,9 @@ public class RunApplication {
     @Autowired
     private KStreamsJoinsApp kStreamsJoinsApp;
 
+    @Autowired
+    private KafkaStreamsState kafkaStreamsState;
+
     public void execute() {
         System.out.println("Executing");
         kafkaStreamsFeatures();
@@ -66,5 +70,6 @@ public class RunApplication {
 
     private void kafkaStreamsFeatures() {
         kStreamsJoinsApp.join();
+        kafkaStreamsState.statefulKStreams();
     }
 }
