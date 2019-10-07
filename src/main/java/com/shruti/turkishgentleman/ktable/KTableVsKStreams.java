@@ -21,7 +21,7 @@ public class KTableVsKStreams {
     @Autowired
     private Properties producerProperties;
 
-    private void tableVsStream() {
+    public void tableVsStream() {
 
         StreamsBuilder builder = new StreamsBuilder();
         KTable<String, StockTickerData> stockTickerDataKTable = builder.table(STOCK_TICKER_TABLE_TOPIC);
