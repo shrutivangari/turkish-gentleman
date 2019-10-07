@@ -39,6 +39,10 @@ public class StreamsSerdes {
         return new FixedSizePriorityQueueSerde();
     }
 
+    public static Serde<TransactionSummary> TransactionSummarySerde() {
+        return new TransactionSummarySerde();
+    }
+
     public static final class PurchaseSerde extends WrapperSerde<Purchase> {
         public PurchaseSerde() {
             super(new JsonSerializer<>(), new JsonDeserializer<>(Purchase.class));
@@ -72,6 +76,12 @@ public class StreamsSerdes {
     public static final class FixedSizePriorityQueueSerde extends WrapperSerde<FixedSizePriorityQueue> {
         public FixedSizePriorityQueueSerde() {
             super(new JsonSerializer<>(), new JsonDeserializer<>(FixedSizePriorityQueue.class));
+        }
+    }
+
+    public static final class TransactionSummarySerde extends WrapperSerde<TransactionSummary> {
+        public TransactionSummarySerde() {
+            super(new JsonSerializer<>(), new JsonDeserializer<>(TransactionSummary.class));
         }
     }
 

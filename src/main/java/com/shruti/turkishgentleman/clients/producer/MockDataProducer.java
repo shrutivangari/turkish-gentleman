@@ -18,6 +18,13 @@ public class MockDataProducer {
     private static Callback callback;
     private static String TOPIC = "Test";
 
+    public static final int NUMBER_UNIQUE_CUSTOMERS = 100;
+    public static final int NUMBER_UNIQUE_STORES = 15;
+    public static final int NUMBER_TEXT_STATEMENTS = 15;
+    public static final int DEFAULT_NUM_PURCHASES = 100;
+    public static final int NUMBER_TRADED_COMPANIES = 50;
+    public static final int NUM_ITERATIONS = 10;
+
     @Autowired
     private static KafkaProducer producer;
 
