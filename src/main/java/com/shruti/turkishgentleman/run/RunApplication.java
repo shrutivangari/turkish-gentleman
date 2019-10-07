@@ -1,6 +1,7 @@
 package com.shruti.turkishgentleman.run;
 
 import com.shruti.turkishgentleman.clients.consumer.ThreadedConsumer;
+import com.shruti.turkishgentleman.ktable.AggregationsAndReducing;
 import com.shruti.turkishgentleman.ktable.KTableVsKStreams;
 import com.shruti.turkishgentleman.mapreducelambdas.MapReduceConcepts;
 import com.shruti.turkishgentleman.clients.producer.SettingPartition;
@@ -46,6 +47,9 @@ public class RunApplication {
     @Autowired
     private KTableVsKStreams kTableVsKStreams;
 
+    @Autowired
+    private AggregationsAndReducing aggregationsAndReducing;
+
     public void execute() {
         System.out.println("Executing");
         kafkaTables();
@@ -79,5 +83,6 @@ public class RunApplication {
 
     private void kafkaTables() {
         kTableVsKStreams.tableVsStream();
+       // aggregationsAndReducing.example();
     }
 }

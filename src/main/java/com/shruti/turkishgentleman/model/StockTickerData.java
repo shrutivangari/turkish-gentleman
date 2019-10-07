@@ -16,10 +16,10 @@ public class StockTickerData {
         return symbol;
     }
 
-    public StockTickerData(double price, String symbol) {
-        this.price = price;
-        this.symbol = symbol;
-    }
+//    public StockTickerData(double price, String symbol) {
+//        this.price = price;
+//        this.symbol = symbol;
+//    }
 
     @Override
     public String toString() {

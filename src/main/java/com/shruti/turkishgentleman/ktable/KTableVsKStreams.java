@@ -8,6 +8,7 @@ import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KTable;
 import org.apache.kafka.streams.kstream.Printed;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Properties;
@@ -19,7 +20,8 @@ public class KTableVsKStreams {
     private static final String STOCK_TICKER_STREAM_TOPIC = "stock-ticker-stream";
 
     @Autowired
-    private Properties producerProperties;
+    @Qualifier("streamProperties")
+    private Properties streamProperties;
 
     public void tableVsStream() {
 
@@ -32,7 +34,7 @@ public class KTableVsKStreams {
         stockTickerDataKStream.print(Printed.<String, StockTickerData>toSysOut().withLabel("Stocks-KStream"));
 
         MockDataProducer.produceRandomTextData();
-        KafkaStreams kafkaStreams = new KafkaStreams(builder.build(), producerProperties);
+        KafkaStreams kafkaStreams = new KafkaStreams(builder.build(), streamProperties);
         kafkaStreams.cleanUp();
         kafkaStreams.close();
         MockDataProducer.shutdown();

@@ -1,14 +1,15 @@
 package com.shruti.turkishgentleman.utils.serde;
 
-import com.shruti.turkishgentleman.model.Purchase;
-import com.shruti.turkishgentleman.model.PurchasePattern;
-import com.shruti.turkishgentleman.model.RewardAccumulator;
+import com.github.javafaker.Stock;
+import com.shruti.turkishgentleman.model.*;
+import com.shruti.turkishgentleman.utils.collectors.FixedSizePriorityQueue;
 import com.shruti.turkishgentleman.utils.serializer.JsonDeserializer;
 import com.shruti.turkishgentleman.utils.serializer.JsonSerializer;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serializer;
 
+import java.util.List;
 import java.util.Map;
 
 public class StreamsSerdes {
@@ -23,6 +24,19 @@ public class StreamsSerdes {
 
     public static Serde<RewardAccumulator> RewardAccumulatorSerde() {
         return new RewardAccumulatorSerde();
+    }
+
+    public static Serde<StockTransaction> StockTransactionSerde() {
+        return new StockTransactionSerde();
+    }
+
+    public static Serde<ShareVolume> ShareVolumeSerde() {
+        return new ShareVolumeSerde();
+    }
+
+
+    public static Serde<FixedSizePriorityQueue> FixedSizePriorityQueueSerde() {
+        return new FixedSizePriorityQueueSerde();
     }
 
     public static final class PurchaseSerde extends WrapperSerde<Purchase> {
@@ -40,6 +54,24 @@ public class StreamsSerdes {
     public static final class RewardAccumulatorSerde extends WrapperSerde<RewardAccumulator> {
         public RewardAccumulatorSerde() {
             super(new JsonSerializer<>(), new JsonDeserializer<>(RewardAccumulator.class));
+        }
+    }
+
+    public static final class StockTransactionSerde extends WrapperSerde<StockTransaction> {
+        public StockTransactionSerde(){
+            super(new JsonSerializer<>(), new JsonDeserializer<>(StockTransaction.class));
+        }
+    }
+
+    public static final class ShareVolumeSerde extends WrapperSerde<ShareVolume> {
+        public ShareVolumeSerde() {
+            super(new JsonSerializer<>(), new JsonDeserializer<>(ShareVolume.class));
+        }
+    }
+
+    public static final class FixedSizePriorityQueueSerde extends WrapperSerde<FixedSizePriorityQueue> {
+        public FixedSizePriorityQueueSerde() {
+            super(new JsonSerializer<>(), new JsonDeserializer<>(FixedSizePriorityQueue.class));
         }
     }
 
