@@ -4,7 +4,6 @@ import com.shruti.turkishgentleman.partition.PurchaseKey;
 import com.shruti.turkishgentleman.partition.PurchaseKeyPartitioner;
 import com.shruti.turkishgentleman.utils.Slug;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.kafka.streams.StreamsConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
