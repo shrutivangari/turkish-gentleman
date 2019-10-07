@@ -12,6 +12,7 @@ import com.shruti.turkishgentleman.streams.StreamConsumerFlow;
 import com.shruti.turkishgentleman.streams.StreamingApp;
 import com.shruti.turkishgentleman.streams.StreamingAppAdvanced;
 import com.shruti.turkishgentleman.streams.state.KafkaStreamsState;
+import com.shruti.turkishgentleman.utils.topics.TopicCreation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -56,18 +57,19 @@ public class RunApplication {
 
     public void execute() {
         System.out.println("Executing");
-        kafkaTables();
+        producePartitionConsumeMessages();
+    }
+
+    //Chapter 1 - Threaded Consumer, Custom Key Partitioner, Producer
+    private void producePartitionConsumeMessages() {
+        simpleProducer.produceMessages();
+        settingPartition.setPartition();
+        threadedConsumer.startConsuming();
     }
 
     private void mapReduceDemo() {
         mapReduceConcepts.mapDemo();
         mapReduceConcepts.reduceDemo();
-    }
-
-    private void producePartitionConsumeMessages() {
-        simpleProducer.produceMessages();
-        settingPartition.setPartition();
-        //threadedConsumer.startConsuming();
     }
 
     private void kafkaStreamsBasics() {

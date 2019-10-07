@@ -56,7 +56,7 @@ public class ApplicationConfiguration {
 
     @Bean(name = "numberOfPartitions")
     public Integer numberOfPartitions() {
-        return 10;
+        return 2;
     }
 
     @Bean("purchaseKeyProducerProperties")

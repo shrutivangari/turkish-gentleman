@@ -14,6 +14,8 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static com.shruti.turkishgentleman.utils.topics.Topics.TRANSACTIONS;
+
 @Component
 public class ThreadedConsumer {
 
@@ -40,7 +42,7 @@ public class ThreadedConsumer {
             Consumer<String, String> consumer = null;
             try {
                 consumer = new KafkaConsumer<>(properties);
-                consumer.subscribe(Collections.singletonList("test-topic"));
+                consumer.subscribe(Collections.singletonList(TRANSACTIONS.topicName()));
 
                 while(!doneConsuming) {
                     ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(5000));

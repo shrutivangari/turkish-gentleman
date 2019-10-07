@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.shruti.turkishgentleman.utils.topics.Topics.TRANSACTIONS;
+
 @Component
 public class SettingPartition {
 
@@ -22,7 +24,7 @@ public class SettingPartition {
         //Dont have to keep track of the value of the integer if it goes beyond Integer.MAX_VALUE
         int currentPartition = Math.abs(partitionIndex.getAndIncrement() % numberOfPartitions);
 
-        ProducerRecord<String, String> record = new ProducerRecord<>("topic", currentPartition, "key", "Value");
+        ProducerRecord<String, String> record = new ProducerRecord<>(TRANSACTIONS.topicName(), currentPartition, "key", "Value");
         System.out.println(record.value());
     }
 }

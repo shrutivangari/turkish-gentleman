@@ -2,7 +2,13 @@ package com.shruti.turkishgentleman.utils.topics;
 
 public enum Topics {
 
-    COMPANIES {
+    TRANSACTIONS {
+        @Override
+        public String toString() {
+            return "transactions";
+        }
+    },
+    COMPANIES{
         @Override
         public String toString() {
             return "companies";
