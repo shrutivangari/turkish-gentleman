@@ -8,6 +8,12 @@ public enum Topics {
             return "transactions";
         }
     },
+    TRANSACTIONS_TRANSFORMED {
+      @Override
+      public String toString() {
+          return "transactions-transformer";
+      }
+    },
     COMPANIES{
         @Override
         public String toString() {

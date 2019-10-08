@@ -58,28 +58,24 @@ public class RunApplication {
     public void execute() {
         System.out.println("Executing");
         producePartitionConsumeMessages();
+        kafkaStreams();
     }
 
-    //Chapter 1 - Threaded Consumer, Custom Key Partitioner, Producer
+    //Chapter 2 - Threaded Consumer, Custom Key Partitioner, Producer, MapReduce concepts
     private void producePartitionConsumeMessages() {
         simpleProducer.produceMessages();
         settingPartition.setPartition();
         threadedConsumer.startConsuming();
-    }
-
-    private void mapReduceDemo() {
         mapReduceConcepts.mapDemo();
         mapReduceConcepts.reduceDemo();
     }
 
-    private void kafkaStreamsBasics() {
+    //Chapter 3 - Kafka Streams Hello World, Process streams, Advanced app - consume
+    private void kafkaStreams() {
         streamConsumerFlow.helloWorldStreamsDemo();
         streamConsumerFlow.helloNotDeprecated();
-    }
-
-    private void kafkaStreamsEndToEnd() {
         streamingApp.processStreams();
-        streamingAppAdvanced.consume();
+//        streamingAppAdvanced.consume();
     }
 
     private void kafkaStreamsFeatures() {

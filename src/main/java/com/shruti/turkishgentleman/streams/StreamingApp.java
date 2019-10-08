@@ -22,6 +22,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
+import static com.shruti.turkishgentleman.utils.topics.Topics.TRANSACTIONS;
+
 @Component
 public class StreamingApp {
 
@@ -30,10 +32,6 @@ public class StreamingApp {
     private Properties streamProperties;
 
     public void processStreams() {
-
-        //Streams Config
-        StreamsConfig streamsConfig = new StreamsConfig(streamProperties);
-
 
         //Declare Serdes
         Serde<Purchase> purchaseSerde = StreamsSerdes.PurchaseSerde();
@@ -45,7 +43,7 @@ public class StreamingApp {
         StreamsBuilder streamsBuilder = new StreamsBuilder();
 
         //KStreams
-        KStream<String, Purchase> purchaseKStream = streamsBuilder.stream("transactions", Consumed.with(stringSerde, purchaseSerde))
+        KStream<String, Purchase> purchaseKStream = streamsBuilder.stream(TRANSACTIONS.topicName(), Consumed.with(stringSerde, purchaseSerde))
                 .mapValues(p -> Purchase.builder(p).maskCreditCard().build());
         KStream<String, PurchasePattern> patternKStream = purchaseKStream.mapValues(p -> PurchasePattern.builder(p).build());
         patternKStream.print(Printed.<String, PurchasePattern>toSysOut().withLabel("patterns"));

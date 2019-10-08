@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import static com.shruti.turkishgentleman.utils.topics.Topics.TRANSACTIONS;
+import static com.shruti.turkishgentleman.utils.topics.Topics.TRANSACTIONS_TRANSFORMED;
+
 import java.util.Properties;
 
 
@@ -31,7 +34,7 @@ public class StreamConsumerFlow {
         System.out.println("Hello world for Kafka streams");
         Serde<String> stringSerde = Serdes.String();
         StreamsBuilder builder = new StreamsBuilder();
-        KStream<String, String> simpleFirstStream = builder.stream("transactions", Consumed.with(stringSerde, stringSerde));
+        KStream<String, String> simpleFirstStream = builder.stream(TRANSACTIONS.topicName(), Consumed.with(stringSerde, stringSerde));
         KStream<String, String> upperCasedStream = simpleFirstStream.mapValues(x -> x.toUpperCase());
         upperCasedStream.to("out-topic", Produced.with(stringSerde, stringSerde));
         upperCasedStream.print(Printed .<String, String>toSysOut().withLabel("Yelling App"));
@@ -40,9 +43,9 @@ public class StreamConsumerFlow {
     private StreamsBuilder builder() {
         Serde<String> stringSerde = Serdes.String();
         StreamsBuilder builder = new StreamsBuilder();
-        builder.stream("out-topic", Consumed.with(stringSerde, stringSerde))
+        builder.stream(TRANSACTIONS.topicName(), Consumed.with(stringSerde, stringSerde))
                 .mapValues(x -> x.toUpperCase())
-                .to("output-topic", Produced.with(stringSerde, stringSerde));
+                .to(TRANSACTIONS_TRANSFORMED.topicName(), Produced.with(stringSerde, stringSerde));
         return builder;
     }
 
