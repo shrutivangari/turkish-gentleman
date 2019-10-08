@@ -57,7 +57,7 @@ public class RunApplication {
 
     public void execute() {
         System.out.println("Executing");
-        producePartitionConsumeMessages();
+//        producePartitionConsumeMessages();
         kafkaStreams();
     }
 
@@ -75,7 +75,7 @@ public class RunApplication {
         streamConsumerFlow.helloWorldStreamsDemo();
         streamConsumerFlow.helloNotDeprecated();
         streamingApp.processStreams();
-//        streamingAppAdvanced.consume();
+        streamingAppAdvanced.consume();
     }
 
     private void kafkaStreamsFeatures() {

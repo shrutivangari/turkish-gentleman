@@ -88,7 +88,7 @@ public class KTableJoin {
 
         CustomDateGenerator dateGenerator = CustomDateGenerator.withTimestampsIncreasingBy(Duration.ofMillis(750));
         DataGenerator.setTimestampGenerator(dateGenerator::get);
-        MockDataProducer.produceRandomTextData();
+//        MockDataProducer.produceRandomTextData();
 
         System.out.println("Starting CountingWindowing and KTableJoins Example");
         kafkaStreams.cleanUp();

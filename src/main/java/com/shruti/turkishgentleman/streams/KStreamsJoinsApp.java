@@ -17,6 +17,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
+import static com.shruti.turkishgentleman.utils.topics.Topics.STREAMS_JOINS;
+
 @Component
 public class KStreamsJoinsApp {
 
@@ -59,7 +61,7 @@ public class KStreamsJoinsApp {
         joinedKStream.print(Printed.<String, CorrelatedPurchase>toSysOut().withLabel("joined KStream"));
 
         // used only to produce data for this application, not typical usage
-        MockDataProducer.produceRandomTextData();
+        MockDataProducer.produceRandomTextData(STREAMS_JOINS.topicName());
         KafkaStreams kafkaStreams = new KafkaStreams(builder.build(), streamProperties);
         kafkaStreams.start();
         try {

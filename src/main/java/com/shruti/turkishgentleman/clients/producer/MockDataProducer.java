@@ -17,38 +17,22 @@ public class MockDataProducer {
 //    private static Producer<String, String> producer;
     private static ExecutorService executorService = Executors.newFixedThreadPool(1);
     private static Callback callback;
-    private static String TOPIC = "Test";
-
-    public static final int NUMBER_UNIQUE_CUSTOMERS = 100;
-    public static final int NUMBER_UNIQUE_STORES = 15;
-    public static final int NUMBER_TEXT_STATEMENTS = 15;
-    public static final int DEFAULT_NUM_PURCHASES = 100;
-    public static final int NUMBER_TRADED_COMPANIES = 50;
     public static final int NUM_ITERATIONS = 10;
 
     @Autowired
     private static KafkaProducer producer;
 
-    public static void produceRandomTextData() {
-        Runnable generateTask = () -> {
-            init();
-            int counter = 0;
-            while(counter++ < 5) {
-                List<String> textValues = DataGenerator.generateRandomText();
+    @Autowired
+    private static MockTypeDataProducer mockTypeDataProducer;
 
-                for(String value: textValues) {
-                    ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC, null, value);
-                    producer.send(record, callback);
-                }
+    public static void producePurchaseData() {
+        init();
+        mockTypeDataProducer.producePurchaseData(NUM_ITERATIONS, producer);
+    }
 
-                try{
-                    Thread.sleep(60);
-                } catch(InterruptedException ex) {
-                    Thread.interrupted();
-                }
-            }
-        };
-        executorService.submit(generateTask);
+    public static void produceRandomTextData(final String TOPIC) {
+        init();
+        mockTypeDataProducer.produceRamdonData(NUM_ITERATIONS, producer, TOPIC);
     }
 
     public static void shutdown() {
@@ -63,7 +47,7 @@ public class MockDataProducer {
 
     }
 
-    private static void init() {
+    public static void init() {
         if(producer == null) {
             System.out.println("Initializing the producer");
             Properties properties = new Properties();

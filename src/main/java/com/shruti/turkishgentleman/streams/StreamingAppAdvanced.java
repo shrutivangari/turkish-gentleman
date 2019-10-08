@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import static com.shruti.turkishgentleman.utils.topics.Topics.STREAMS_DEMO;
+
 import java.util.Properties;
 
 @Component
@@ -69,7 +71,7 @@ public class StreamingAppAdvanced {
         ForeachAction<String, Purchase> purchaseForeachAction = (key, purchase) -> SecurityDBService.saveRecord(purchase.getPurchaseDate(), purchase.getEmployeeId(), purchase.getItemPurchased());
         purchaseKStream.filter((key, purchase) -> purchase.getEmployeeId().equals("00000")).foreach(purchaseForeachAction);
 
-        MockDataProducer.produceRandomTextData();
+        MockDataProducer.produceRandomTextData(STREAMS_DEMO.topicName());
         KafkaStreams kafkaStreams = new KafkaStreams(streamsBuilder.build(), streamProperties);
         kafkaStreams.start();
         try {

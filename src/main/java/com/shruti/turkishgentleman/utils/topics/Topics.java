@@ -26,6 +26,24 @@ public enum Topics {
             return "clients";
         }
     },
+    STREAMS_DEMO{
+      @Override
+      public String toString() {
+          return "streams-demo";
+      }
+    },
+    STREAMS_JOINS{
+      @Override
+      public String toString() {
+          return "streams-joins";
+      }
+    },
+    STREAMS_STATEFUL {
+      @Override
+      public String toString() {
+          return "streams-stateful";
+      }
+    },
     STOCK_TRANSACTIONS_TOPIC {
         @Override
         public String toString() {

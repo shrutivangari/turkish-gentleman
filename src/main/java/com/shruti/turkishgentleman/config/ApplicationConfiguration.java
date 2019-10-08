@@ -3,6 +3,7 @@ package com.shruti.turkishgentleman.config;
 import com.shruti.turkishgentleman.partition.PurchaseKey;
 import com.shruti.turkishgentleman.partition.PurchaseKeyPartitioner;
 import com.shruti.turkishgentleman.utils.Slug;
+import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.streams.StreamsConfig;
 import org.springframework.beans.factory.annotation.Value;
@@ -90,5 +91,10 @@ public class ApplicationConfiguration {
     public StreamsConfig streamsConfiguration() {
         StreamsConfig streamsConfig = new StreamsConfig(getStreamProperties());
         return streamsConfig;
+    }
+
+    @Bean("producer")
+    public KafkaProducer<String, String> getKafkaProducer() {
+        return new KafkaProducer<>(producerProperties());
     }
 }

@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 public class DataGenerator {
-    public static final int NUMBER_TEXT_STATEMENTS = 5;
+    public static final int NUMBER_TEXT_STATEMENTS = 15;
     private static Faker dateFaker = new Faker();
     private static Supplier<Date> timestampGenerator = () -> dateFaker.date().past(15, TimeUnit.MINUTES, new Date());
 

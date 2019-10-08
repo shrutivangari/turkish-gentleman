@@ -43,11 +43,20 @@ public class StreamingApp {
         StreamsBuilder streamsBuilder = new StreamsBuilder();
 
         //KStreams
-        KStream<String, Purchase> purchaseKStream = streamsBuilder.stream(TRANSACTIONS.topicName(), Consumed.with(stringSerde, purchaseSerde))
-                .mapValues(p -> Purchase.builder(p).maskCreditCard().build());
-        KStream<String, PurchasePattern> patternKStream = purchaseKStream.mapValues(p -> PurchasePattern.builder(p).build());
+        KStream<String, Purchase> purchaseKStream = streamsBuilder.stream(TRANSACTIONS.topicName(),
+                Consumed.with(stringSerde, purchaseSerde))
+                .mapValues(p -> Purchase.builder(p)
+                        .maskCreditCard()
+                        .build());
+
+
+        KStream<String, PurchasePattern> patternKStream = purchaseKStream.mapValues(p -> PurchasePattern
+                .builder(p)
+                .build());
+
         patternKStream.print(Printed.<String, PurchasePattern>toSysOut().withLabel("patterns"));
         patternKStream.to("patterns", Produced.with(stringSerde, purchasePatternSerde));
+
         KStream<String, RewardAccumulator> rewardsKStream = purchaseKStream.mapValues(purchase -> RewardAccumulator.builder(purchase).build());
 
         rewardsKStream.print(Printed.<String, RewardAccumulator>toSysOut().withLabel("rewards"));
@@ -56,7 +65,7 @@ public class StreamingApp {
         purchaseKStream.print(Printed.<String, Purchase>toSysOut().withLabel("purchases"));
         purchaseKStream.to("purchases", Produced.with(stringSerde,purchaseSerde));
 
-        MockDataProducer.produceRandomTextData();
+        MockDataProducer.producePurchaseData();
         KafkaStreams kafkaStreams = new KafkaStreams(streamsBuilder.build(),streamProperties);
         kafkaStreams.start();
         try {
@@ -68,13 +77,5 @@ public class StreamingApp {
         MockDataProducer.shutdown();
 
     }
-
-    private static final class PurchaseSerde extends Serdes.WrapperSerde<Purchase> {
-        PurchaseSerde() {
-            super(new JsonSerializer<>(), new JsonDeserializer<>(Purchase.class));
-        }
-    }
-
-
 
 }

@@ -25,6 +25,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
+import static com.shruti.turkishgentleman.utils.topics.Topics.STREAMS_STATEFUL;
+
 @Component
 public class KafkaStreamsState {
 
@@ -62,7 +64,7 @@ public class KafkaStreamsState {
         statefulRewardAccumulator.to("rewards", Produced.with(stringSerde, rewardAccumulatorSerde));
 
         // used only to produce data for this application, not typical usage
-        MockDataProducer.produceRandomTextData();
+        MockDataProducer.produceRandomTextData(STREAMS_STATEFUL.topicName());
 
         KafkaStreams kafkaStreams = new KafkaStreams(builder.build(),streamProperties);
         kafkaStreams.cleanUp();

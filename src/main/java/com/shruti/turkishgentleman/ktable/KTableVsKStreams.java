@@ -33,7 +33,7 @@ public class KTableVsKStreams {
                 .print(Printed.<String, StockTickerData>toSysOut().withLabel("Stocks-KTable"));
         stockTickerDataKStream.print(Printed.<String, StockTickerData>toSysOut().withLabel("Stocks-KStream"));
 
-        MockDataProducer.produceRandomTextData();
+        MockDataProducer.produceRandomTextData(STOCK_TICKER_TABLE_TOPIC);
         KafkaStreams kafkaStreams = new KafkaStreams(builder.build(), streamProperties);
         kafkaStreams.cleanUp();
         kafkaStreams.close();
