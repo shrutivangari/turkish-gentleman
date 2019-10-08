@@ -36,7 +36,7 @@ public class StreamingAppAdvanced {
 
         //Build the stream
         StreamsBuilder streamsBuilder = new StreamsBuilder();
-        KStream<String,Purchase> purchaseKStream = streamsBuilder.stream( "transactions", Consumed.with(stringSerde, purchaseSerde))
+        KStream<String,Purchase> purchaseKStream = streamsBuilder.stream(STREAMS_DEMO.topicName(), Consumed.with(stringSerde, purchaseSerde))
                 .mapValues(p -> Purchase.builder(p).maskCreditCard().build());
 
         KStream<String, PurchasePattern> patternKStream = purchaseKStream.mapValues(purchase -> PurchasePattern.builder(purchase).build());
@@ -71,7 +71,7 @@ public class StreamingAppAdvanced {
         ForeachAction<String, Purchase> purchaseForeachAction = (key, purchase) -> SecurityDBService.saveRecord(purchase.getPurchaseDate(), purchase.getEmployeeId(), purchase.getItemPurchased());
         purchaseKStream.filter((key, purchase) -> purchase.getEmployeeId().equals("00000")).foreach(purchaseForeachAction);
 
-        MockDataProducer.produceRandomTextData(STREAMS_DEMO.topicName());
+        MockDataProducer.producePurchaseData(STREAMS_DEMO.topicName());
         KafkaStreams kafkaStreams = new KafkaStreams(streamsBuilder.build(), streamProperties);
         kafkaStreams.start();
         try {

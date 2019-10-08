@@ -25,9 +25,9 @@ public class MockDataProducer {
     @Autowired
     private static MockTypeDataProducer mockTypeDataProducer;
 
-    public static void producePurchaseData() {
+    public static void producePurchaseData(final String topic) {
         init();
-        mockTypeDataProducer.producePurchaseData(NUM_ITERATIONS, producer);
+        mockTypeDataProducer.producePurchaseData(NUM_ITERATIONS, producer, topic);
     }
 
     public static void produceRandomTextData(final String TOPIC) {

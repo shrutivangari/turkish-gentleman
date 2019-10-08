@@ -65,7 +65,7 @@ public class StreamingApp {
         purchaseKStream.print(Printed.<String, Purchase>toSysOut().withLabel("purchases"));
         purchaseKStream.to("purchases", Produced.with(stringSerde,purchaseSerde));
 
-        MockDataProducer.producePurchaseData();
+        MockDataProducer.producePurchaseData(TRANSACTIONS.topicName());
         KafkaStreams kafkaStreams = new KafkaStreams(streamsBuilder.build(),streamProperties);
         kafkaStreams.start();
         try {

@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static com.shruti.turkishgentleman.utils.topics.Topics.TRANSACTIONS;
-
 @Component
 public class MockTypeDataProducer {
 
@@ -51,14 +49,14 @@ public class MockTypeDataProducer {
         executorService.submit(generateTask);
     }
 
-    public static void producePurchaseData(int numberIterations, KafkaProducer producer) {
+    public static void producePurchaseData(int numberIterations, KafkaProducer producer, String topic) {
         Runnable generateTask = () -> {
             int counter = 0;
             while (counter++ < numberIterations  && keepRunning) {
                 List<Purchase> purchases = dataTypes.generatePurchases(numberIterations);
                 List<String> jsonValues = convertToJson(purchases);
                 for (String value : jsonValues) {
-                    ProducerRecord<String, String> record = new ProducerRecord<>(TRANSACTIONS.topicName(), null, value);
+                    ProducerRecord<String, String> record = new ProducerRecord<>(topic, null, value);
                     producer.send(record, callback);
                 }
                 LOG.info("Record batch sent");
